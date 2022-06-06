@@ -1,10 +1,14 @@
 version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: cimg/ruby:3.0.3-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:202010-01
+  my-job:
+    executor: my-executor
     steps:
-      - checkout
-      - run:
-          name: "Testing"
-          command: 
+      - run: echo outside the executor
